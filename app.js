@@ -18,7 +18,7 @@
   const state = {
     image: null,
     objectUrl: null,
-    activeThumb: "newsprint",
+    activeThumb: "cat",
     fontSize: 48,
     outline: 6,
     layout: "classic",
@@ -160,6 +160,14 @@
     noise(g, 0.1);
   }
 
+  const PHOTOS = [
+    { id: "cat", name: "Startled Cat", src: "templates/startled-cat.jpg" },
+    { id: "wide-eyes", name: "Wide Eyes", src: "templates/wide-eyes.jpg" },
+    { id: "dog", name: "Head Tilt", src: "templates/head-tilt.jpg" },
+    { id: "road", name: "Open Road", src: "templates/open-road.jpg" },
+    { id: "gull", name: "Seagull", src: "templates/seagull.jpg" },
+  ];
+
   const TEMPLATES = [
     { id: "newsprint", name: "Newsprint", paint: paintNewsprint },
     { id: "ink", name: "Ink", paint: paintInk },
@@ -189,8 +197,23 @@
     return c;
   }
 
+  function loadImage(src) {
+    return new Promise(function (resolve, reject) {
+      const img = new Image();
+      img.onload = function () { resolve(img); };
+      img.onerror = reject;
+      img.src = src;
+    });
+  }
+
   async function templateImage(id) {
     if (imageCache[id]) return imageCache[id];
+    const photo = PHOTOS.find(function (t) { return t.id === id; });
+    if (photo) {
+      const img = await loadImage(photo.src);
+      imageCache[id] = img;
+      return img;
+    }
     const spec = TEMPLATES.find(function (t) { return t.id === id; });
     const img = await canvasToImage(makeCanvas(1200, 900, spec.paint));
     imageCache[id] = img;
@@ -390,23 +413,33 @@
     draw();
   }
 
+  function makeThumbButton(id, name, previewEl) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "thumb";
+    btn.dataset.id = id;
+    btn.setAttribute("role", "listitem");
+    btn.setAttribute("aria-pressed", id === state.activeThumb ? "true" : "false");
+    previewEl.setAttribute("aria-hidden", "true");
+    const label = document.createElement("span");
+    label.textContent = name;
+    btn.appendChild(previewEl);
+    btn.appendChild(label);
+    btn.addEventListener("click", function () { useTemplate(id); });
+    thumbsEl.appendChild(btn);
+  }
+
   function renderThumbs() {
     thumbsEl.innerHTML = "";
+    PHOTOS.forEach(function (t) {
+      const img = document.createElement("img");
+      img.src = t.src;
+      img.alt = t.name;
+      makeThumbButton(t.id, t.name, img);
+    });
     TEMPLATES.forEach(function (t) {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "thumb";
-      btn.dataset.id = t.id;
-      btn.setAttribute("role", "listitem");
-      btn.setAttribute("aria-pressed", t.id === state.activeThumb ? "true" : "false");
       const preview = makeCanvas(240, 180, t.paint);
-      preview.setAttribute("aria-hidden", "true");
-      const label = document.createElement("span");
-      label.textContent = t.name;
-      btn.appendChild(preview);
-      btn.appendChild(label);
-      btn.addEventListener("click", function () { useTemplate(t.id); });
-      thumbsEl.appendChild(btn);
+      makeThumbButton(t.id, t.name, preview);
     });
   }
 
@@ -504,7 +537,7 @@
 
   function start() {
     Promise.resolve(document.fonts ? document.fonts.ready : true).then(function () {
-      return useTemplate("newsprint");
+      return useTemplate("cat");
     });
   }
   start();

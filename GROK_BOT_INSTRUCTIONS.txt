@@ -1,0 +1,44 @@
+Continue work on my public repo: https://github.com/nyanpiggle/meme-press
+
+This is Meme Press, a classic meme caption studio (single-page app, no build).
+
+WHAT IS ALREADY DONE
+- index.html, styles.css, app.js: upload image, pick templates, draggable top/bottom Impact captions, font size slider, outline slider, layout presets (Classic, Top Heavy, Bottom Line, Centered, Modern Bar), reset, PNG download.
+- Print-shop dark UI (Anton + IBM Plex Sans, brass accent #e8c547). Desktop sidebar + mobile stacked layout.
+- Photo templates in templates/ (Unsplash, see ATTRIBUTION.md) plus procedural paper/ink backgrounds.
+- GitHub Actions workflow at .github/workflows/pages.yml. First run FAILED at actions/configure-pages because Pages is not enabled on the repo yet.
+
+DO THESE NEXT, IN ORDER
+
+1. Enable GitHub Pages
+   - Settings → Pages → Build and deployment → Source: GitHub Actions.
+   - Re-run the failed "Deploy Pages" workflow, or push a tiny commit.
+   - Confirm https://nyanpiggle.github.io/meme-press/ actually loads (not a 404).
+   - If configure-pages still fails, switch Pages to "Deploy from a branch" → main → / (root) instead of the Actions workflow.
+
+2. Photo templates
+   - Keep Unsplash/Pexels/original photos only. Never commit watermarked Dreamstime/Alamy/Getty images.
+   - Add 2–4 more meme-friendly photos with space at top and bottom for captions: late-night laptop (no Unsplash+ watermark), coffee mug, mountain goat / cliff, office whiteboard. Update ATTRIBUTION.md.
+   - Default selected template should stay "Startled Cat".
+
+3. Editor polish (keep it a single HTML/CSS/JS app unless I ask otherwise)
+   - Hide the dashed selection box until the user taps a caption (don't show it on first load).
+   - Per-layer select: tapping a caption focuses that layer; font size/outline still apply to both unless that's easy to split.
+   - Optional all-caps toggle for Classic layouts (currently always uppercased except Modern Bar).
+   - Text color: white or black fill, for light vs dark photos.
+   - Make sure download PNG does not include the selection rectangle (already intended via draw(true)).
+   - iOS/Android: file upload must work from a user tap; canvas drag must not scroll the page (touch-action: none is already on the canvas — verify).
+   - 390px wide phones: no horizontal overflow, tap targets >= 44px.
+
+4. Quality bar
+   - Open the live Pages URL and the local index.html.
+   - Upload a photo, drag both captions, change presets, download a PNG, confirm the file opens and matches the canvas.
+   - Test landscape and portrait source images.
+
+5. Do NOT
+   - Do not add accounts, a backend, or npm unless I ask.
+   - Do not replace the print-shop look with purple gradients or Inter.
+   - Do not hide or strip branding that isn't ours.
+   - Do not regenerate the whole app from scratch.
+
+When you finish, leave Pages working and reply with the live URL plus what you changed.
