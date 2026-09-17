@@ -1,44 +1,43 @@
 Continue work on my public repo: https://github.com/nyanpiggle/meme-press
 
-This is Meme Press, a classic meme caption studio (single-page app, no build).
+This is Meme Press, a classic meme caption studio. Single HTML/CSS/JS app. No npm, no backend, no accounts.
 
-WHAT IS ALREADY DONE
-- index.html, styles.css, app.js: upload image, pick templates, draggable top/bottom Impact captions, font size slider, outline slider, layout presets (Classic, Top Heavy, Bottom Line, Centered, Modern Bar), reset, PNG download.
+WHAT IS ALREADY DONE (do not rebuild from scratch)
+- index.html, styles.css, app.js: upload image, pick photo + procedural templates, draggable top/bottom Impact captions, font size slider, outline slider, layout presets (Classic, Top Heavy, Bottom Line, Centered, Modern Bar), reset, PNG download.
 - Print-shop dark UI (Anton + IBM Plex Sans, brass accent #e8c547). Desktop sidebar + mobile stacked layout.
-- Photo templates in templates/ (Unsplash, see ATTRIBUTION.md) plus procedural paper/ink backgrounds.
-- GitHub Actions workflow at .github/workflows/pages.yml. First run FAILED at actions/configure-pages because Pages is not enabled on the repo yet.
+- Photo templates in templates/ (Unsplash + Pexels, see ATTRIBUTION.md): startled-cat, wide-eyes, head-tilt, open-road, seagull, coffee, mountain-goat, late-night, conference. Default selected template is Startled Cat.
+- Procedural paper/ink templates still in app.js (Newsprint, Ink, Brass, Storm Road, Late Night paint, Spotlight, Halftone, Crimson).
+- GitHub Actions workflow at .github/workflows/pages.yml. First run FAILED at actions/configure-pages because Pages is not enabled on the repo yet. Live URL 404s until Pages is turned on.
 
 DO THESE NEXT, IN ORDER
 
-1. Enable GitHub Pages
-   - Settings → Pages → Build and deployment → Source: GitHub Actions.
-   - Re-run the failed "Deploy Pages" workflow, or push a tiny commit.
-   - Confirm https://nyanpiggle.github.io/meme-press/ actually loads (not a 404).
-   - If configure-pages still fails, switch Pages to "Deploy from a branch" → main → / (root) instead of the Actions workflow.
+1. Enable GitHub Pages (this is the only blocker for a public URL)
+   I cannot enable Pages from the API without flipping the repo setting. Do this in the GitHub UI:
+   - Open https://github.com/nyanpiggle/meme-press/settings/pages
+   - Build and deployment → Source: GitHub Actions
+   - Re-run the failed "Deploy Pages" workflow: https://github.com/nyanpiggle/meme-press/actions
+     or push a tiny no-op commit.
+   - Confirm https://nyanpiggle.github.io/meme-press/ loads (not a 404).
+   - Fallback if configure-pages still fails: Settings → Pages → Deploy from a branch → main → / (root). Then you can delete .github/workflows/pages.yml.
 
-2. Photo templates
-   - Keep Unsplash/Pexels/original photos only. Never commit watermarked Dreamstime/Alamy/Getty images.
-   - Add 2–4 more meme-friendly photos with space at top and bottom for captions: late-night laptop (no Unsplash+ watermark), coffee mug, mountain goat / cliff, office whiteboard. Update ATTRIBUTION.md.
-   - Default selected template should stay "Startled Cat".
-
-3. Editor polish (keep it a single HTML/CSS/JS app unless I ask otherwise)
-   - Hide the dashed selection box until the user taps a caption (don't show it on first load).
-   - Per-layer select: tapping a caption focuses that layer; font size/outline still apply to both unless that's easy to split.
+2. Editor polish (keep it a single HTML/CSS/JS app)
+   - Hide the dashed brass selection box until the user taps a caption (do not show it on first load).
    - Optional all-caps toggle for Classic layouts (currently always uppercased except Modern Bar).
-   - Text color: white or black fill, for light vs dark photos.
-   - Make sure download PNG does not include the selection rectangle (already intended via draw(true)).
-   - iOS/Android: file upload must work from a user tap; canvas drag must not scroll the page (touch-action: none is already on the canvas — verify).
+   - Text color toggle: white or black fill, for light vs dark photos.
+   - Confirm download PNG does not include the selection rectangle (draw(true) already intended).
+   - iOS/Android: file upload must work from a user tap; canvas drag must not scroll the page (touch-action: none is already on the canvas — verify on a phone).
    - 390px wide phones: no horizontal overflow, tap targets >= 44px.
 
-4. Quality bar
-   - Open the live Pages URL and the local index.html.
+3. Quality bar
+   - Open the live Pages URL and local index.html.
    - Upload a photo, drag both captions, change presets, download a PNG, confirm the file opens and matches the canvas.
-   - Test landscape and portrait source images.
+   - Test landscape and portrait source images (coffee is landscape, cat is closer to square).
 
-5. Do NOT
+4. Do NOT
    - Do not add accounts, a backend, or npm unless I ask.
    - Do not replace the print-shop look with purple gradients or Inter.
-   - Do not hide or strip branding that isn't ours.
+   - Do not commit Dreamstime / Alamy / Getty watermarked stock. Unsplash and Pexels only; update ATTRIBUTION.md if you add photos.
    - Do not regenerate the whole app from scratch.
+   - Do not create login routes or a database.
 
-When you finish, leave Pages working and reply with the live URL plus what you changed.
+When you finish, leave Pages working and reply with the live URL plus a short list of what you changed.

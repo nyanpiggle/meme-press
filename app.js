@@ -166,13 +166,17 @@
     { id: "dog", name: "Head Tilt", src: "templates/head-tilt.jpg" },
     { id: "road", name: "Open Road", src: "templates/open-road.jpg" },
     { id: "gull", name: "Seagull", src: "templates/seagull.jpg" },
+    { id: "coffee", name: "Coffee", src: "templates/coffee.jpg" },
+    { id: "goat", name: "Mountain Goat", src: "templates/mountain-goat.jpg" },
+    { id: "night", name: "Late Night", src: "templates/late-night.jpg" },
+    { id: "meeting", name: "Conference", src: "templates/conference.jpg" },
   ];
 
   const TEMPLATES = [
     { id: "newsprint", name: "Newsprint", paint: paintNewsprint },
     { id: "ink", name: "Ink", paint: paintInk },
     { id: "brass", name: "Brass", paint: paintBrass },
-    { id: "storm", name: "Open Road", paint: paintStorm },
+    { id: "storm", name: "Storm Road", paint: paintStorm },
     { id: "night", name: "Late Night", paint: paintNight },
     { id: "studio", name: "Spotlight", paint: paintStudio },
     { id: "halftone", name: "Halftone", paint: paintHalftone },
