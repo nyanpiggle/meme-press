@@ -1,4 +1,5 @@
 Continue work on my public repo: https://github.com/nyanpiggle/meme-press
+Live site: https://nyanpiggle.github.io/meme-press/
 
 This is Meme Press, a classic meme caption studio. Single HTML/CSS/JS app. No npm, no backend, no accounts.
 
@@ -6,38 +7,28 @@ WHAT IS ALREADY DONE (do not rebuild from scratch)
 - index.html, styles.css, app.js: upload image, pick photo + procedural templates, draggable top/bottom Impact captions, font size slider, outline slider, layout presets (Classic, Top Heavy, Bottom Line, Centered, Modern Bar), reset, PNG download.
 - Print-shop dark UI (Anton + IBM Plex Sans, brass accent #e8c547). Desktop sidebar + mobile stacked layout.
 - Photo templates in templates/ (Unsplash + Pexels, see ATTRIBUTION.md): startled-cat, wide-eyes, head-tilt, open-road, seagull, coffee, mountain-goat, late-night, conference. Default selected template is Startled Cat.
-- Procedural paper/ink templates still in app.js (Newsprint, Ink, Brass, Storm Road, Late Night paint, Spotlight, Halftone, Crimson).
-- GitHub Actions workflow at .github/workflows/pages.yml. First run FAILED at actions/configure-pages because Pages is not enabled on the repo yet. Live URL 404s until Pages is turned on.
+- Procedural paper/ink templates in app.js: Newsprint, Ink, Brass, Storm Road, Spotlight, Halftone, Crimson.
+- GitHub Pages is ON and deploying from Actions. Live URL: https://nyanpiggle.github.io/meme-press/
 
-DO THESE NEXT, IN ORDER
+DO THESE NEXT
 
-1. Enable GitHub Pages (this is the only blocker for a public URL)
-   I cannot enable Pages from the API without flipping the repo setting. Do this in the GitHub UI:
-   - Open https://github.com/nyanpiggle/meme-press/settings/pages
-   - Build and deployment → Source: GitHub Actions
-   - Re-run the failed "Deploy Pages" workflow: https://github.com/nyanpiggle/meme-press/actions
-     or push a tiny no-op commit.
-   - Confirm https://nyanpiggle.github.io/meme-press/ loads (not a 404).
-   - Fallback if configure-pages still fails: Settings → Pages → Deploy from a branch → main → / (root). Then you can delete .github/workflows/pages.yml.
-
-2. Editor polish (keep it a single HTML/CSS/JS app)
+1. Editor polish (keep it a single HTML/CSS/JS app)
    - Hide the dashed brass selection box until the user taps a caption (do not show it on first load).
    - Optional all-caps toggle for Classic layouts (currently always uppercased except Modern Bar).
    - Text color toggle: white or black fill, for light vs dark photos.
    - Confirm download PNG does not include the selection rectangle (draw(true) already intended).
    - iOS/Android: file upload must work from a user tap; canvas drag must not scroll the page (touch-action: none is already on the canvas — verify on a phone).
-   - 390px wide phones: no horizontal overflow, tap targets >= 44px.
+   - 390px-wide phones: no horizontal overflow, tap targets >= 44px.
 
-3. Quality bar
-   - Open the live Pages URL and local index.html.
+2. Quality bar
+   - Open https://nyanpiggle.github.io/meme-press/ and local index.html.
    - Upload a photo, drag both captions, change presets, download a PNG, confirm the file opens and matches the canvas.
-   - Test landscape and portrait source images (coffee is landscape, cat is closer to square).
+   - Test landscape (coffee, goat) and closer-to-square (cat) sources.
 
-4. Do NOT
+3. Do NOT
    - Do not add accounts, a backend, or npm unless I ask.
    - Do not replace the print-shop look with purple gradients or Inter.
    - Do not commit Dreamstime / Alamy / Getty watermarked stock. Unsplash and Pexels only; update ATTRIBUTION.md if you add photos.
    - Do not regenerate the whole app from scratch.
-   - Do not create login routes or a database.
 
-When you finish, leave Pages working and reply with the live URL plus a short list of what you changed.
+When you finish, reply with the live URL plus a short list of what you changed.
